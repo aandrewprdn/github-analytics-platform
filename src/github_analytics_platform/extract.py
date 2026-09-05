@@ -43,9 +43,9 @@ def collect_and_save_github_data(q: str, per_page: int = 10, pages_to_fetch: int
             save_json_to_parquet_local_file(items, f"{INGESTION_PATH}/{ingestion_date}/page_{page_num}.parquet")
 
 
-if __name__ == "__main__":
-    collect_and_save_github_data(
-        q="dataengineer language:python",
-        per_page=10,
-        pages_to_fetch=5
-    )
+# if __name__ == "__main__":
+#     collect_and_save_github_data(
+#         q="dataengineer language:python",
+#         per_page=10,
+#         pages_to_fetch=5
+#     )
