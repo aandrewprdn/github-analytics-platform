@@ -37,10 +37,14 @@ def collect_and_save_github_data(q: str, per_page: int = 10, pages_to_fetch: int
         for page_data in pages_data_iter:
             items = page_data.get("items", [])
 
+            df = pl.DataFrame(page_data["items"]).with_columns(
+                pl.lit(page_data["_metadata"]).alias("_metadata"),
+            )
+
             ingestion_date = datetime.fromisoformat(page_data["_metadata"]["ingested_at"]).date().isoformat()
             page_num = page_data["_metadata"].get("page", 1)
             
-            save_json_to_parquet_local_file(items, f"{INGESTION_PATH}/ingestion_date={ingestion_date}/page_{page_num}.parquet")
+            save_json_to_parquet_local_file(df.to_dict(), f"{INGESTION_PATH}/ingestion_date={ingestion_date}/page_{page_num}.parquet")
 
 
 # if __name__ == "__main__":
