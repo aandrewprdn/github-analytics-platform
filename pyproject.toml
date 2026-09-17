@@ -10,9 +10,12 @@ requires-python = ">=3.13"
 dependencies = [
     "boto3>=1.43.86",
     "dotenv>=0.9.9",
+    "pandas>=3.0.5",
     "polars>=1.44.1",
-    "psycopg>=3.3.5",
+    "psycopg[binary]>=3.3.5",
+    "pyarrow>=25.0.1",
     "requests>=2.34.2",
+    "sqlalchemy>=2.0.54",
     "tenacity>=9.1.4",
 ]
 
