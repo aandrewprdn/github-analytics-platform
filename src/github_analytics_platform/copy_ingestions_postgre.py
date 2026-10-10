@@ -60,8 +60,9 @@ def copy_ingestions_to_db(ingestion_path: pathlib.Path):
 
         df_ing = transform_before_db(df_ing)
 
+        logger.info(f"writing to database {f"postgresql+psycopg://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('POSTGRES_HOST')}:5432/{os.getenv('POSTGRES_DB')}"}")
         df_ing.write_database(
-            connection=f"postgresql+psycopg://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@localhost:5432/{os.getenv('POSTGRES_DB')}",
+            connection=f"postgresql+psycopg://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('POSTGRES_HOST')}:5432/{os.getenv('POSTGRES_DB')}",
             table_name=TABLE_NAME,
             if_table_exists="append",
             engine='sqlalchemy'

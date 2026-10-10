@@ -1,9 +1,12 @@
-FROM apache/airflow:3.1.0-python3.13
+FROM apache/airflow:3.3.2-python3.14
 
 USER airflow
 WORKDIR /opt/airflow
 
-COPY pyproject.toml uv.lock ./
+COPY pyproject.toml uv.lock README.md ./
+COPY src/ ./src/
 
-RUN pip install --no-cache-dir uv psycopg[binary] && \
-    uv sync --frozen --no-dev --no-install-project
+# RUN test -f /opt/airflow/src/github_analytics_platform/__init__.py
+
+RUN pip install --no-cache-dir uv && \
+    uv pip install --no-cache -p /home/airflow/.local/bin/python .

@@ -8,6 +8,7 @@ authors = [
 ]
 requires-python = ">=3.13"
 dependencies = [
+    "apache-airflow>=3.3.2",
     "boto3>=1.43.86",
     "dotenv>=0.9.9",
     "pandas>=3.0.5",
@@ -25,6 +26,10 @@ github-analytics-platform = "github_analytics_platform:main"
 [build-system]
 requires = ["uv_build>=0.12.9,<0.13.0"]
 build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "github_analytics_platform"
+module-root = "src"
 
 [dependency-groups]
 dev = [
