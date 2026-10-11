@@ -15,9 +15,3 @@ def upload_parquet_files():
         object_key = f"{BASE_KEY}/{relative_path.as_posix()}"
 
         client.upload_file(file, object_key)
-
-
-# if __name__ == "__main__":
-#     from dotenv import load_dotenv
-#     load_dotenv()
-#     upload_parquet_files()

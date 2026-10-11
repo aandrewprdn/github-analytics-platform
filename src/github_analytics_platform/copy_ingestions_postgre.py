@@ -67,16 +67,3 @@ def copy_ingestions_to_db(ingestion_path: pathlib.Path):
             if_table_exists="append",
             engine='sqlalchemy'
         )
-
-# if __name__ == "__main__":
-#     from dotenv import load_dotenv
-#     load_dotenv()
-    
-#     local_ingestions_path = os.getenv("LOCAL_INGESTIONS_PATH")
-
-#     if local_ingestions_path :
-#         local_ingestions_path = pathlib.Path(local_ingestions_path)  
-#     else:
-#         local_ingestions_path = pathlib.Path("ingestions/github-analytics/bronze/github/repositories")
-    
-#     copy_ingestions_to_db(local_ingestions_path)
