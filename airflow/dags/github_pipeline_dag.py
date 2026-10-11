@@ -6,6 +6,7 @@ import polars as pl
 import logging
 
 from airflow.sdk import dag, task
+from sqlalchemy import BigInteger, Column, MetaData, Table, Text, create_engine
 
 from github_analytics_platform.copy_ingestions_postgre import transform_before_db
 from github_analytics_platform.github_client import GithubClient
@@ -20,6 +21,7 @@ logger = logging.getLogger(__name__)
 
 TEST_QUERY = "dataengineer language:python"
 PAGES_TO_FETCH = 10
+POSTGRES_URL = f"postgresql+psycopg://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('POSTGRES_HOST')}:5432/{os.getenv('POSTGRES_DB')}"
 
 @dag("github_extract_pipeline")
 def github_extract_pipeline():
@@ -68,13 +70,44 @@ def github_extract_pipeline():
             }
 
     @task
-    def upload_bronze_to_minio(file_info: dict):
+    def ensure_minio_bucket():
         client = MinioClient()
         client.ensure_bucket()
+
+    @task
+    def upload_bronze_to_minio(file_info: dict):
+        client = MinioClient()
 
         file = Path(file_info["file_path"])
 
         client.upload_file(file, file_info["file_path"])
+
+    @task
+    def ensure_raw_table():
+        metadata = MetaData()
+
+        Table(
+            os.environ["POSTGRES_RAW_TABLE_NAME"],
+            metadata,
+            Column("repository_id", BigInteger),
+            Column("name", Text),
+            Column("full_name", Text),
+            Column("owner", Text),
+            Column("language", Text),
+            Column("stargazers_count", BigInteger),
+            Column("forks_count", BigInteger),
+            Column("created_at", Text),
+            Column("updated_at", Text),
+            Column("license", Text),
+            Column("ingested_at", Text),
+            Column("page", BigInteger),
+        )
+
+        engine = create_engine(POSTGRES_URL)
+        try:
+            metadata.create_all(engine, checkfirst=True)
+        finally:
+            engine.dispose()
 
     @task
     def copy_bronze_postgresql(file_info: dict):
@@ -89,9 +122,9 @@ def github_extract_pipeline():
         df_ing = pl.read_parquet(file.absolute())
         
         df_ing = transform_before_db(df_ing)
-        
+
         df_ing.write_database(
-                connection=f"postgresql+psycopg://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@localhost:5432/{os.getenv('POSTGRES_DB')}",
+                connection=POSTGRES_URL,
                 table_name=TABLE_NAME,
                 if_table_exists="append",
                 engine='sqlalchemy'
@@ -115,7 +148,11 @@ def github_extract_pipeline():
         extract_configs
     )
 
-    upload_bronze_to_minio.expand(file_info=bronze_files)
-    copy_bronze_postgresql.expand(file_info=bronze_files)
+    bucket_ready = ensure_minio_bucket()
+    uploads = upload_bronze_to_minio.expand(file_info=bronze_files)
+
+    bucket_ready >> uploads
+    
+    ensure_raw_table() >> copy_bronze_postgresql.expand(file_info=bronze_files)
 
 github_extract_pipeline()

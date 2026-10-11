@@ -22,9 +22,11 @@ class MinioClient:
     def ensure_bucket(self):
         try:
             self.client.head_bucket(Bucket=self.bucket_name)
+            return True
         except ClientError:
             logger.info("Creating bucket %s", self.bucket_name)
             self.client.create_bucket(Bucket=self.bucket_name)
+            return False
 
     def upload_file(self, local_path: Path, key: str):
         logger.info("Uploading %s -> s3://%s/%s", local_path, self.bucket_name, key)

@@ -5,7 +5,7 @@ x-airflow-common: &airflow-common
   env_file: .env
   environment:
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
-    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}
     AIRFLOW__CORE__LOAD_EXAMPLES: "false"
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
     AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "true"
@@ -41,10 +41,10 @@ services:
       retries: 5
 
   minio:
-    image: minio/minio:latest
+    image: quay.io/minio/aistor/minio:latest
     container_name: de-minio
     restart: unless-stopped
-    command: server /data --console-address ":9001"
+    command: server /data --console-address ":9001" --license ./minio.license
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
@@ -53,6 +53,7 @@ services:
       - "9001:9001"
     volumes:
       - minio_data:/data
+      - ./minio.license:/minio.license:ro
 
   airflow-init:
     <<: *airflow-common
@@ -92,15 +93,15 @@ services:
       airflow-init:
         condition: service_completed_successfully
 
-  metabase:
-    image: metabase/metabase:latest
-    container_name: de-metabase
-    restart: unless-stopped
-    ports:
-      - "3000:3000"
-    depends_on:
-      postgres:
-        condition: service_healthy
+  # metabase:
+  #   image: metabase/metabase:latest
+  #   container_name: de-metabase
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
 
   pgadmin:
     image: dpage/pgadmin4:latest
