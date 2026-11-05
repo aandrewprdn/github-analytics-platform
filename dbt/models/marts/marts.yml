@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: dim_repositories
+    description: Latest known record for each repository, prepared for repository-level dashboard filters and drill-through.
+    columns:
+      - name: repository_id
+        description: Stable GitHub repository identifier.
+        tests:
+          - unique
+          - not_null
+      - name: full_name
+        tests:
+          - not_null
+      - name: language_group
+        description: Programming language with missing values grouped as Unknown.
+      - name: license_name
+        description: SPDX license identifier or name, with missing licenses grouped as No license.
+  - name: agg_language_popularity
+    description: Repository, star, and fork metrics grouped by programming language for dashboard comparisons.
+    columns:
+      - name: language_group
+        tests:
+          - unique
+          - not_null
+      - name: repository_count
+        tests:
+          - not_null
+  - name: agg_repository_creation_monthly
+    description: Monthly repository creation counts and current popularity metrics for time-series dashboards.
+    columns:
+      - name: creation_month
+        tests:
+          - unique
+          - not_null
+      - name: repository_count
+        tests:
+          - not_null
