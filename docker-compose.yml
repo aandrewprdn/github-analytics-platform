@@ -22,6 +22,24 @@ x-airflow-common: &airflow-common
       condition: service_healthy
 
 services:
+  dbt:
+    build:
+      context: .
+      dockerfile: docker/dbt/Dockerfile
+    container_name: de-dbt
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DBT_PROFILES_DIR: /opt/dbt
+      DBT_USER: ${DBT_USER}
+      DBT_PASSWORD: ${DBT_PASSWORD}
+      DBT_HOST: ${DBT_HOST:-de-postgres}
+      DBT_PORT: ${DBT_PORT:-5432}
+      DBT_DATABASE: ${DBT_DATABASE}
+    volumes:
+      - ./dbt:/opt/dbt
+    networks:
+      - default
 
   postgres:
     image: postgres:16

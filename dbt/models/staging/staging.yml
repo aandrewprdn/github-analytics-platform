@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: stg_github_repositories
+    description: Typed and normalized repository records from the raw ingestion table.
+    columns:
+      - name: repository_id
+        tests:
+          - not_null
+      - name: full_name
+        tests:
+          - not_null
