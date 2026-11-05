@@ -1,0 +1,16 @@
+name: github_analytics_platform
+version: '1.0.0'
+config-version: 2
+
+profile: github_analytics_platform
+
+model-paths: ["models"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+
+models:
+  github_analytics_platform:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table

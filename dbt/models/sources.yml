@@ -1,0 +1,28 @@
+version: 2
+
+sources:
+  - name: github_ingestion
+    description: Raw GitHub repository search results loaded by the ingestion pipeline.
+    schema: public
+    tables:
+      - name: raw_repositories
+        identifier: "{{ env_var('POSTGRES_RAW_TABLE_NAME', 'github_repositories') }}"
+        description: Raw repository records with one row per repository per ingestion page.
+        columns:
+          - name: repository_id
+            description: GitHub repository ID.
+            tests:
+              - not_null
+          - name: name
+          - name: full_name
+          - name: owner
+            description: Owner object serialized as JSON text.
+          - name: language
+          - name: stargazers_count
+          - name: forks_count
+          - name: created_at
+          - name: updated_at
+          - name: license
+            description: License object serialized as JSON text.
+          - name: ingested_at
+          - name: page
