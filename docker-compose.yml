@@ -8,7 +8,7 @@ x-airflow-common: &airflow-common
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}
     AIRFLOW__CORE__LOAD_EXAMPLES: "false"
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
-    AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "true"
+    AIRFLOW__API__EXPOSE_CONFIG: "true"
     AIRFLOW__CORE__EXECUTION_API_SERVER_URL: "http://airflow-api-server:8080/execution/"
     AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW__API_AUTH__JWT_SECRET}
   volumes:
@@ -22,24 +22,23 @@ x-airflow-common: &airflow-common
       condition: service_healthy
 
 services:
+  # One-off tool container, not a long-running service:
+  #   docker compose run --rm dbt build
   dbt:
     build:
       context: .
       dockerfile: docker/dbt/Dockerfile
-    container_name: de-dbt
-    restart: unless-stopped
+    profiles: ["tools"]
     env_file: .env
     environment:
       DBT_PROFILES_DIR: /opt/dbt
-      DBT_USER: ${DBT_USER}
-      DBT_PASSWORD: ${DBT_PASSWORD}
-      DBT_HOST: ${DBT_HOST:-de-postgres}
-      DBT_PORT: ${DBT_PORT:-5432}
-      DBT_DATABASE: ${DBT_DATABASE}
+      DBT_HOST: postgres
+      DBT_PORT: 5432
     volumes:
       - ./dbt:/opt/dbt
-    networks:
-      - default
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   postgres:
     image: postgres:16

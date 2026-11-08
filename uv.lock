@@ -822,7 +822,6 @@ name = "github-analytics-platform"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "apache-airflow" },
     { name = "boto3" },
     { name = "dotenv" },
     { name = "pandas" },
@@ -836,6 +835,7 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "apache-airflow" },
     { name = "pre-commit" },
     { name = "pytest" },
     { name = "ruff" },
@@ -843,7 +843,6 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "apache-airflow", specifier = ">=3.3.2" },
     { name = "boto3", specifier = ">=1.43.86" },
     { name = "dotenv", specifier = ">=0.9.9" },
     { name = "pandas", specifier = ">=3.0.5" },
@@ -857,6 +856,7 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "apache-airflow", specifier = ">=3.3.2" },
     { name = "pre-commit", specifier = ">=4.6.2" },
     { name = "pytest", specifier = ">=9.1.1" },
     { name = "ruff", specifier = ">=0.16.5" },
