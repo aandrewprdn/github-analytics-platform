@@ -2000,3 +2000,560 @@ having count(*) > 1
 [0m14:28:39.194860 [debug] [MainThread]: Command `dbt debug` succeeded at 14:28:39.194773 after 0.38 seconds
 [0m14:28:39.195109 [debug] [MainThread]: Connection 'debug' was properly closed.
 [0m14:28:39.195352 [debug] [MainThread]: Flushing usage events
+
+
+============================== 16:47:54.432933 | bd4ef182-8158-48a6-97d2-58a62708921c ==============================
+[0m16:47:54.432933 [info ] [MainThread]: Running with dbt=1.12.6
+[0m16:47:54.436761 [debug] [MainThread]: running dbt with arguments {'no_print': 'None', 'log_cache_events': 'False', 'write_json': 'True', 'invocation_command': 'dbt build -s stg_owner', 'profiles_dir': '/home/andrii/Developing/data-engineer/github-analytics-platform/dbt', 'indirect_selection': 'eager', 'introspect': 'True', 'printer_width': '80', 'hints_enabled': 'True', 'send_anonymous_usage_stats': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'partial_parse': 'True', 'maximum_seed_size_mib': '1', 'debug': 'False', 'empty': 'False', 'quiet': 'False', 'fail_fast': 'False', 'version_check': 'True', 'warn_error': 'None', 'log_format': 'default', 'target_path': 'None', 'use_colors': 'True', 'cache_selected_only': 'False', 'log_path': '/home/andrii/Developing/data-engineer/github-analytics-platform/dbt/logs', 'use_experimental_parser': 'False', 'static_parser': 'True'}
+[0m16:47:54.634495 [info ] [MainThread]: Registered adapter: postgres=1.11.0
+[0m16:47:54.716221 [debug] [MainThread]: checksum: b88b38c9eec53d12885b5971dbc5330a469c0e65a771af18e1b34a8c8a9ffc39, vars: {}, profile: github_analytics_platform, target: dev, version: 1.12.6
+[0m16:47:54.884870 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Parsing Error
+  Error reading github_analytics_platform: staging/staging.yml - Runtime Error
+    Syntax error near line 26
+    ------------------------------
+    23 |   - name: stg_owners
+    24 |     description: Typed and normalized owner records from the raw ingestion table.
+    25 |     columns:
+    26 | :
+    27 | 
+    28 |   - name: stg_owner
+    29 |     description: >
+    
+    Raw Error:
+    ------------------------------
+    while parsing a block mapping
+      in "<unicode string>", line 1, column 1
+    did not find expected key
+      in "<unicode string>", line 26, column 1
+[0m16:47:54.885596 [debug] [MainThread]: Resource report: {"command_name": "build", "command_success": false, "command_wall_clock_time": 0.5137144, "process_in_blocks": "52936", "process_kernel_time": 0.286615, "process_mem_max_rss": "125236", "process_out_blocks": "8", "process_user_time": 1.380117}
+[0m16:47:54.886000 [debug] [MainThread]: Command `dbt build` failed at 16:47:54.885929 after 0.51 seconds
+[0m16:47:54.886316 [debug] [MainThread]: Flushing usage events
+
+
+============================== 16:48:01.518660 | 5be2c40e-9deb-4457-a692-447f715f08f3 ==============================
+[0m16:48:01.518660 [info ] [MainThread]: Running with dbt=1.12.6
+[0m16:48:01.521176 [debug] [MainThread]: running dbt with arguments {'empty': 'None', 'use_colors': 'True', 'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'log_cache_events': 'False', 'fail_fast': 'False', 'no_print': 'None', 'partial_parse': 'True', 'static_parser': 'True', 'debug': 'False', 'hints_enabled': 'True', 'warn_error': 'None', 'cache_selected_only': 'False', 'version_check': 'True', 'send_anonymous_usage_stats': 'False', 'quiet': 'False', 'log_path': '/home/andrii/Developing/data-engineer/github-analytics-platform/dbt/logs', 'use_experimental_parser': 'False', 'introspect': 'True', 'maximum_seed_size_mib': '1', 'log_format': 'default', 'profiles_dir': '/home/andrii/Developing/data-engineer/github-analytics-platform/dbt', 'invocation_command': 'dbt parse'}
+[0m16:48:01.700120 [info ] [MainThread]: Registered adapter: postgres=1.11.0
+[0m16:48:01.778826 [debug] [MainThread]: checksum: b88b38c9eec53d12885b5971dbc5330a469c0e65a771af18e1b34a8c8a9ffc39, vars: {}, profile: github_analytics_platform, target: dev, version: 1.12.6
+[0m16:48:01.939667 [info ] [MainThread]: Unable to do partial parsing because profile has changed
+[0m16:48:01.945334 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Parsing Error
+  Error reading github_analytics_platform: staging/staging.yml - Runtime Error
+    Syntax error near line 26
+    ------------------------------
+    23 |   - name: stg_owners
+    24 |     description: Typed and normalized owner records from the raw ingestion table.
+    25 |     columns:
+    26 | :
+    27 | 
+    28 |   - name: stg_owner
+    29 |     description: >
+    
+    Raw Error:
+    ------------------------------
+    while parsing a block mapping
+      in "<unicode string>", line 1, column 1
+    did not find expected key
+      in "<unicode string>", line 26, column 1
+[0m16:48:01.946021 [debug] [MainThread]: Resource report: {"command_name": "parse", "command_success": false, "command_wall_clock_time": 0.4849398, "process_in_blocks": "56", "process_kernel_time": 0.208321, "process_mem_max_rss": "124612", "process_out_blocks": "8", "process_user_time": 1.337249}
+[0m16:48:01.946454 [debug] [MainThread]: Command `dbt parse` failed at 16:48:01.946377 after 0.49 seconds
+[0m16:48:01.946767 [debug] [MainThread]: Flushing usage events
+
+
+============================== 16:48:22.820403 | 07e5556d-9a76-45ad-ba25-0d48c1cd2a06 ==============================
+[0m16:48:22.820403 [info ] [MainThread]: Running with dbt=1.12.6
+[0m16:48:22.823678 [debug] [MainThread]: running dbt with arguments {'introspect': 'True', 'debug': 'False', 'empty': 'False', 'use_colors': 'True', 'warn_error': 'None', 'invocation_command': 'dbt build -s stg_owner', 'printer_width': '80', 'version_check': 'True', 'use_experimental_parser': 'False', 'hints_enabled': 'True', 'static_parser': 'True', 'log_cache_events': 'False', 'send_anonymous_usage_stats': 'False', 'log_path': '/home/andrii/Developing/data-engineer/github-analytics-platform/dbt/logs', 'log_format': 'default', 'profiles_dir': '/home/andrii/Developing/data-engineer/github-analytics-platform/dbt', 'cache_selected_only': 'False', 'write_json': 'True', 'partial_parse': 'True', 'maximum_seed_size_mib': '1', 'indirect_selection': 'eager', 'fail_fast': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'quiet': 'False', 'target_path': 'None', 'no_print': 'None'}
+[0m16:48:23.008683 [info ] [MainThread]: Registered adapter: postgres=1.11.0
+[0m16:48:23.096129 [debug] [MainThread]: checksum: b88b38c9eec53d12885b5971dbc5330a469c0e65a771af18e1b34a8c8a9ffc39, vars: {}, profile: github_analytics_platform, target: dev, version: 1.12.6
+[0m16:48:23.314768 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 1 files added, 1 files changed.
+[0m16:48:23.315702 [debug] [MainThread]: Partial parsing: added file: github_analytics_platform://models/staging/stg_owner.sql
+[0m16:48:23.316168 [debug] [MainThread]: Partial parsing: updated file: github_analytics_platform://models/staging/staging.yml
+[0m16:48:23.902485 [debug] [MainThread]: Wrote artifact WritableManifest to /home/andrii/Developing/data-engineer/github-analytics-platform/dbt/target/manifest.json
+[0m16:48:23.904756 [debug] [MainThread]: Wrote artifact SemanticManifest to /home/andrii/Developing/data-engineer/github-analytics-platform/dbt/target/semantic_manifest.json
+[0m16:48:23.918529 [debug] [MainThread]: Wrote artifact OsiDocument to /home/andrii/Developing/data-engineer/github-analytics-platform/dbt/target/osi_document.json
+[0m16:48:23.943969 [info ] [MainThread]: Found 5 models, 19 data tests, 1 source, 593 macros
+[0m16:48:23.946189 [info ] [MainThread]: 
+[0m16:48:23.946718 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m16:48:23.947099 [info ] [MainThread]: 
+[0m16:48:23.947698 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m16:48:23.948537 [debug] [ThreadPool]: Acquiring new postgres connection 'list_github_analytics'
+[0m16:48:23.990883 [debug] [ThreadPool]: Using postgres connection "list_github_analytics"
+[0m16:48:23.991322 [debug] [ThreadPool]: On list_github_analytics: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "github_analytics_platform", "target_name": "dev", "connection_name": "list_github_analytics"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m16:48:23.991650 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m16:48:24.015471 [debug] [ThreadPool]: SQL status: SELECT 5 in 0.024 seconds
+[0m16:48:24.017549 [debug] [ThreadPool]: On list_github_analytics: Close
+[0m16:48:24.024154 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_github_analytics, now create_github_analytics_zz_check_staging)
+[0m16:48:24.025391 [debug] [ThreadPool]: Creating schema "database: "github_analytics"
+schema: "zz_check_staging"
+"
+[0m16:48:24.031533 [debug] [ThreadPool]: Using postgres connection "create_github_analytics_zz_check_staging"
+[0m16:48:24.032265 [debug] [ThreadPool]: On create_github_analytics_zz_check_staging: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "github_analytics_platform", "target_name": "dev", "connection_name": "create_github_analytics_zz_check_staging"} */
+create schema if not exists "zz_check_staging"
+[0m16:48:24.032754 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m16:48:24.044664 [debug] [ThreadPool]: SQL status: CREATE SCHEMA in 0.012 seconds
+[0m16:48:24.046102 [debug] [ThreadPool]: On create_github_analytics_zz_check_staging: COMMIT
+[0m16:48:24.046698 [debug] [ThreadPool]: Using postgres connection "create_github_analytics_zz_check_staging"
+[0m16:48:24.047130 [debug] [ThreadPool]: On create_github_analytics_zz_check_staging: COMMIT
+[0m16:48:24.052698 [debug] [ThreadPool]: SQL status: COMMIT in 0.005 seconds
+[0m16:48:24.053358 [debug] [ThreadPool]: On create_github_analytics_zz_check_staging: Close
+[0m16:48:24.059027 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly create_github_analytics_zz_check_staging, now list_github_analytics_zz_check_staging)
+[0m16:48:24.063615 [debug] [ThreadPool]: Using postgres connection "list_github_analytics_zz_check_staging"
+[0m16:48:24.064404 [debug] [ThreadPool]: Acquiring new postgres connection 'list_github_analytics_zz_check_marts'
+[0m16:48:24.064766 [debug] [ThreadPool]: On list_github_analytics_zz_check_staging: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "github_analytics_platform", "target_name": "dev", "connection_name": "list_github_analytics_zz_check_staging"} */
+select
+      'github_analytics' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'zz_check_staging'
+    union all
+    select
+      'github_analytics' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'zz_check_staging'
+    union all
+    select
+      'github_analytics' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'zz_check_staging'
+    union all
+    select distinct
+     'github_analytics' as database,
+     proname as name,
+     ns.nspname as schema,
+     'function' as type
+    from pg_proc
+     join pg_namespace as ns on pronamespace = ns.oid
+    where ns.nspname ilike 'zz_check_staging'
+  
+[0m16:48:24.065920 [debug] [ThreadPool]: Using postgres connection "list_github_analytics_zz_check_marts"
+[0m16:48:24.066255 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m16:48:24.066601 [debug] [ThreadPool]: On list_github_analytics_zz_check_marts: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "github_analytics_platform", "target_name": "dev", "connection_name": "list_github_analytics_zz_check_marts"} */
+select
+      'github_analytics' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'zz_check_marts'
+    union all
+    select
+      'github_analytics' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'zz_check_marts'
+    union all
+    select
+      'github_analytics' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'zz_check_marts'
+    union all
+    select distinct
+     'github_analytics' as database,
+     proname as name,
+     ns.nspname as schema,
+     'function' as type
+    from pg_proc
+     join pg_namespace as ns on pronamespace = ns.oid
+    where ns.nspname ilike 'zz_check_marts'
+  
+[0m16:48:24.067072 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m16:48:24.087172 [debug] [ThreadPool]: SQL status: SELECT 0 in 0.020 seconds
+[0m16:48:24.088705 [debug] [ThreadPool]: On list_github_analytics_zz_check_marts: ROLLBACK
+[0m16:48:24.089105 [debug] [ThreadPool]: SQL status: SELECT 0 in 0.023 seconds
+[0m16:48:24.089962 [debug] [ThreadPool]: On list_github_analytics_zz_check_staging: ROLLBACK
+[0m16:48:24.090277 [debug] [ThreadPool]: On list_github_analytics_zz_check_marts: Close
+[0m16:48:24.090822 [debug] [ThreadPool]: On list_github_analytics_zz_check_staging: Close
+[0m16:48:24.093802 [debug] [MainThread]: Using postgres connection "master"
+[0m16:48:24.094196 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "github_analytics_platform", "target_name": "dev", "connection_name": "master"} */
+select distinct
+        dependent_namespace.nspname as dependent_schema,
+        dependent_class.relname as dependent_name,
+        referenced_namespace.nspname as referenced_schema,
+        referenced_class.relname as referenced_name
+
+    -- Query for views: views are entries in pg_class with an entry in pg_rewrite, but we avoid
+    -- a seq scan on pg_rewrite by leveraging the fact there is an "internal" row in pg_depend for
+    -- the view...
+    from pg_class as dependent_class
+    join pg_namespace as dependent_namespace on dependent_namespace.oid = dependent_class.relnamespace
+    join pg_depend as dependent_depend on dependent_depend.refobjid = dependent_class.oid
+        and dependent_depend.classid = 'pg_rewrite'::regclass
+        and dependent_depend.refclassid = 'pg_class'::regclass
+        and dependent_depend.deptype = 'i'
+
+    -- ... and via pg_depend (that has a row per column, hence the need for "distinct" above, and
+    -- making sure to exclude the internal row to avoid a view appearing to depend on itself)...
+    join pg_depend as joining_depend on joining_depend.objid = dependent_depend.objid
+        and joining_depend.classid = 'pg_rewrite'::regclass
+        and joining_depend.refclassid = 'pg_class'::regclass
+        and joining_depend.refobjid != dependent_depend.refobjid
+
+    -- ... we can find the tables they query from in pg_class, but excluding system tables. Note we
+    -- don't need need to exclude _dependent_ system tables, because they only query from other
+    -- system tables, and so are automatically excluded by excluding _referenced_ system tables
+    join pg_class as referenced_class on referenced_class.oid = joining_depend.refobjid
+    join pg_namespace as referenced_namespace on referenced_namespace.oid = referenced_class.relnamespace
+        and referenced_namespace.nspname != 'information_schema'
+        and referenced_namespace.nspname not like 'pg\_%'
+
+    order by
+        dependent_schema, dependent_name, referenced_schema, referenced_name;
+[0m16:48:24.094621 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m16:48:24.106350 [debug] [MainThread]: SQL status: SELECT 0 in 0.012 seconds
+[0m16:48:24.107605 [debug] [MainThread]: On master: ROLLBACK
+[0m16:48:24.108282 [debug] [MainThread]: On master: COMMIT
+[0m16:48:24.108659 [debug] [MainThread]: Using postgres connection "master"
+[0m16:48:24.108928 [debug] [MainThread]: On master: COMMIT
+[0m16:48:24.109631 [debug] [MainThread]: SQL status: COMMIT in 0.000 seconds
+[0m16:48:24.109931 [debug] [MainThread]: On master: Close
+[0m16:48:24.112929 [debug] [Thread-1 (]: Began running node model.github_analytics_platform.stg_owner
+[0m16:48:24.113529 [info ] [Thread-1 (]: 1 of 6 START sql view model zz_check_staging.stg_owner ......................... [RUN]
+[0m16:48:24.113995 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_github_analytics_zz_check_marts, now model.github_analytics_platform.stg_owner)
+[0m16:48:24.114344 [debug] [Thread-1 (]: Began compiling node model.github_analytics_platform.stg_owner
+[0m16:48:24.119436 [debug] [Thread-1 (]: Writing injected SQL for node "model.github_analytics_platform.stg_owner"
+[0m16:48:24.120080 [debug] [Thread-1 (]: Began executing node model.github_analytics_platform.stg_owner
+[0m16:48:24.144388 [debug] [Thread-1 (]: Writing runtime sql for node "model.github_analytics_platform.stg_owner"
+[0m16:48:24.145233 [debug] [Thread-1 (]: Using postgres connection "model.github_analytics_platform.stg_owner"
+[0m16:48:24.145829 [debug] [Thread-1 (]: On model.github_analytics_platform.stg_owner: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "github_analytics_platform", "target_name": "dev", "node_id": "model.github_analytics_platform.stg_owner"} */
+
+  create view "github_analytics"."zz_check_staging"."stg_owner__dbt_tmp"
+    
+    
+  as (
+    with source as (
+    select
+        repository_id,
+        owner,
+        ingested_at
+    from "github_analytics"."zz_raw_check"."repositories_raw"
+),
+
+-- jsonb_to_record's column list must use the exact JSON keys with a type ("key type");
+-- casts and renames happen in the select below.
+renamed as (
+    select
+        source.repository_id::bigint as repository_id,
+        source.ingested_at::timestamptz as ingested_at,
+        owner_record.id as owner_id,
+        owner_record.login as owner_login,
+        owner_record.node_id as owner_node_id,
+        owner_record."type" as owner_type,
+        owner_record.site_admin as is_site_admin,
+        owner_record.avatar_url,
+        nullif(owner_record.gravatar_id, '') as gravatar_id,
+        owner_record.html_url as owner_html_url,
+        owner_record.url as owner_api_url,
+        owner_record.followers_url,
+        owner_record.following_url,
+        owner_record.gists_url,
+        owner_record.starred_url,
+        owner_record.subscriptions_url,
+        owner_record.organizations_url,
+        owner_record.repos_url,
+        owner_record.events_url,
+        owner_record.received_events_url
+    from source
+    cross join lateral jsonb_to_record(source.owner::jsonb) as owner_record (
+        id bigint,
+        login text,
+        node_id text,
+        "type" text,
+        site_admin boolean,
+        avatar_url text,
+        gravatar_id text,
+        html_url text,
+        url text,
+        followers_url text,
+        following_url text,
+        gists_url text,
+        starred_url text,
+        subscriptions_url text,
+        organizations_url text,
+        repos_url text,
+        events_url text,
+        received_events_url text
+    )
+)
+
+select * from renamed
+  );
+[0m16:48:24.146237 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m16:48:24.157836 [debug] [Thread-1 (]: SQL status: CREATE VIEW in 0.011 seconds
+[0m16:48:24.163151 [debug] [Thread-1 (]: Using postgres connection "model.github_analytics_platform.stg_owner"
+[0m16:48:24.163780 [debug] [Thread-1 (]: On model.github_analytics_platform.stg_owner: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "github_analytics_platform", "target_name": "dev", "node_id": "model.github_analytics_platform.stg_owner"} */
+alter table "github_analytics"."zz_check_staging"."stg_owner__dbt_tmp" rename to "stg_owner"
+[0m16:48:24.165215 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.001 seconds
+[0m16:48:24.176474 [debug] [Thread-1 (]: On model.github_analytics_platform.stg_owner: COMMIT
+[0m16:48:24.176898 [debug] [Thread-1 (]: Using postgres connection "model.github_analytics_platform.stg_owner"
+[0m16:48:24.177253 [debug] [Thread-1 (]: On model.github_analytics_platform.stg_owner: COMMIT
+[0m16:48:24.181835 [debug] [Thread-1 (]: SQL status: COMMIT in 0.004 seconds
+[0m16:48:24.186338 [debug] [Thread-1 (]: Applying DROP to: "github_analytics"."zz_check_staging"."stg_owner__dbt_backup"
+[0m16:48:24.190790 [debug] [Thread-1 (]: Using postgres connection "model.github_analytics_platform.stg_owner"
+[0m16:48:24.191174 [debug] [Thread-1 (]: On model.github_analytics_platform.stg_owner: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "github_analytics_platform", "target_name": "dev", "node_id": "model.github_analytics_platform.stg_owner"} */
+drop view if exists "github_analytics"."zz_check_staging"."stg_owner__dbt_backup" cascade
+[0m16:48:24.192207 [debug] [Thread-1 (]: SQL status: DROP VIEW in 0.001 seconds
+[0m16:48:24.194037 [debug] [Thread-1 (]: On model.github_analytics_platform.stg_owner: Close
+[0m16:48:24.195928 [info ] [Thread-1 (]: 1 of 6 OK created sql view model zz_check_staging.stg_owner .................... [[32mCREATE VIEW[0m in 0.08s]
+[0m16:48:24.196693 [debug] [Thread-1 (]: Finished running node model.github_analytics_platform.stg_owner
+[0m16:48:24.197554 [debug] [Thread-2 (]: Began running node test.github_analytics_platform.accepted_values_stg_owner_owner_type__User__Organization.39d27773e3
+[0m16:48:24.197960 [debug] [Thread-1 (]: Began running node test.github_analytics_platform.not_null_stg_owner_owner_login.f9d82be746
+[0m16:48:24.198318 [debug] [Thread-4 (]: Began running node test.github_analytics_platform.not_null_stg_owner_owner_id.37b0a0bdb9
+[0m16:48:24.198678 [debug] [Thread-3 (]: Began running node test.github_analytics_platform.dbt_utils_unique_combination_of_columns_stg_owner_repository_id__ingested_at.956b91cf90
+[0m16:48:24.199047 [info ] [Thread-2 (]: 2 of 6 START test accepted_values_stg_owner_owner_type__User__Organization ..... [RUN]
+[0m16:48:24.199410 [info ] [Thread-1 (]: 5 of 6 START test not_null_stg_owner_owner_login ............................... [RUN]
+[0m16:48:24.199791 [info ] [Thread-4 (]: 4 of 6 START test not_null_stg_owner_owner_id .................................. [RUN]
+[0m16:48:24.200210 [info ] [Thread-3 (]: 3 of 6 START test dbt_utils_unique_combination_of_columns_stg_owner_repository_id__ingested_at  [RUN]
+[0m16:48:24.200660 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly list_github_analytics_zz_check_staging, now test.github_analytics_platform.accepted_values_stg_owner_owner_type__User__Organization.39d27773e3)
+[0m16:48:24.201015 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.github_analytics_platform.stg_owner, now test.github_analytics_platform.not_null_stg_owner_owner_login.f9d82be746)
+[0m16:48:24.201500 [debug] [Thread-4 (]: Acquiring new postgres connection 'test.github_analytics_platform.not_null_stg_owner_owner_id.37b0a0bdb9'
+[0m16:48:24.202120 [debug] [Thread-3 (]: Acquiring new postgres connection 'test.github_analytics_platform.dbt_utils_unique_combination_of_columns_stg_owner_repository_id__ingested_at.956b91cf90'
+[0m16:48:24.202501 [debug] [Thread-2 (]: Began compiling node test.github_analytics_platform.accepted_values_stg_owner_owner_type__User__Organization.39d27773e3
+[0m16:48:24.202841 [debug] [Thread-1 (]: Began compiling node test.github_analytics_platform.not_null_stg_owner_owner_login.f9d82be746
+[0m16:48:24.203228 [debug] [Thread-4 (]: Began compiling node test.github_analytics_platform.not_null_stg_owner_owner_id.37b0a0bdb9
+[0m16:48:24.203651 [debug] [Thread-3 (]: Began compiling node test.github_analytics_platform.dbt_utils_unique_combination_of_columns_stg_owner_repository_id__ingested_at.956b91cf90
+[0m16:48:24.208664 [debug] [Thread-2 (]: Writing injected SQL for node "test.github_analytics_platform.accepted_values_stg_owner_owner_type__User__Organization.39d27773e3"
+[0m16:48:24.216119 [debug] [Thread-1 (]: Writing injected SQL for node "test.github_analytics_platform.not_null_stg_owner_owner_login.f9d82be746"
+[0m16:48:24.220842 [debug] [Thread-4 (]: Writing injected SQL for node "test.github_analytics_platform.not_null_stg_owner_owner_id.37b0a0bdb9"
+[0m16:48:24.225399 [debug] [Thread-3 (]: Writing injected SQL for node "test.github_analytics_platform.dbt_utils_unique_combination_of_columns_stg_owner_repository_id__ingested_at.956b91cf90"
+[0m16:48:24.226127 [debug] [Thread-2 (]: Began executing node test.github_analytics_platform.accepted_values_stg_owner_owner_type__User__Organization.39d27773e3
+[0m16:48:24.226655 [debug] [Thread-3 (]: Began executing node test.github_analytics_platform.dbt_utils_unique_combination_of_columns_stg_owner_repository_id__ingested_at.956b91cf90
+[0m16:48:24.227013 [debug] [Thread-4 (]: Began executing node test.github_analytics_platform.not_null_stg_owner_owner_id.37b0a0bdb9
+[0m16:48:24.227365 [debug] [Thread-1 (]: Began executing node test.github_analytics_platform.not_null_stg_owner_owner_login.f9d82be746
+[0m16:48:24.241099 [debug] [Thread-3 (]: Writing runtime sql for node "test.github_analytics_platform.dbt_utils_unique_combination_of_columns_stg_owner_repository_id__ingested_at.956b91cf90"
+[0m16:48:24.242150 [debug] [Thread-2 (]: Writing runtime sql for node "test.github_analytics_platform.accepted_values_stg_owner_owner_type__User__Organization.39d27773e3"
+[0m16:48:24.243792 [debug] [Thread-4 (]: Writing runtime sql for node "test.github_analytics_platform.not_null_stg_owner_owner_id.37b0a0bdb9"
+[0m16:48:24.245315 [debug] [Thread-1 (]: Writing runtime sql for node "test.github_analytics_platform.not_null_stg_owner_owner_login.f9d82be746"
+[0m16:48:24.245951 [debug] [Thread-3 (]: Using postgres connection "test.github_analytics_platform.dbt_utils_unique_combination_of_columns_stg_owner_repository_id__ingested_at.956b91cf90"
+[0m16:48:24.246485 [debug] [Thread-2 (]: Using postgres connection "test.github_analytics_platform.accepted_values_stg_owner_owner_type__User__Organization.39d27773e3"
+[0m16:48:24.246871 [debug] [Thread-4 (]: Using postgres connection "test.github_analytics_platform.not_null_stg_owner_owner_id.37b0a0bdb9"
+[0m16:48:24.247250 [debug] [Thread-3 (]: On test.github_analytics_platform.dbt_utils_unique_combination_of_columns_stg_owner_repository_id__ingested_at.956b91cf90: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "github_analytics_platform", "target_name": "dev", "node_id": "test.github_analytics_platform.dbt_utils_unique_combination_of_columns_stg_owner_repository_id__ingested_at.956b91cf90"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+
+
+
+
+
+with validation_errors as (
+
+    select
+        repository_id, ingested_at
+    from "github_analytics"."zz_check_staging"."stg_owner"
+    group by repository_id, ingested_at
+    having count(*) > 1
+
+)
+
+select *
+from validation_errors
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m16:48:24.247625 [debug] [Thread-2 (]: On test.github_analytics_platform.accepted_values_stg_owner_owner_type__User__Organization.39d27773e3: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "github_analytics_platform", "target_name": "dev", "node_id": "test.github_analytics_platform.accepted_values_stg_owner_owner_type__User__Organization.39d27773e3"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with all_values as (
+
+    select
+        owner_type as value_field,
+        count(*) as n_records
+
+    from "github_analytics"."zz_check_staging"."stg_owner"
+    group by owner_type
+
+)
+
+select *
+from all_values
+where value_field not in (
+    'User','Organization'
+)
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m16:48:24.247995 [debug] [Thread-1 (]: Using postgres connection "test.github_analytics_platform.not_null_stg_owner_owner_login.f9d82be746"
+[0m16:48:24.248305 [debug] [Thread-4 (]: On test.github_analytics_platform.not_null_stg_owner_owner_id.37b0a0bdb9: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "github_analytics_platform", "target_name": "dev", "node_id": "test.github_analytics_platform.not_null_stg_owner_owner_id.37b0a0bdb9"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select owner_id
+from "github_analytics"."zz_check_staging"."stg_owner"
+where owner_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m16:48:24.248640 [debug] [Thread-3 (]: Opening a new connection, currently in state init
+[0m16:48:24.248958 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m16:48:24.249290 [debug] [Thread-1 (]: On test.github_analytics_platform.not_null_stg_owner_owner_login.f9d82be746: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "github_analytics_platform", "target_name": "dev", "node_id": "test.github_analytics_platform.not_null_stg_owner_owner_login.f9d82be746"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select owner_login
+from "github_analytics"."zz_check_staging"."stg_owner"
+where owner_login is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m16:48:24.249619 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m16:48:24.250135 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m16:48:24.261342 [debug] [Thread-3 (]: SQL status: SELECT 1 in 0.013 seconds
+[0m16:48:24.261868 [debug] [Thread-4 (]: SQL status: SELECT 1 in 0.012 seconds
+[0m16:48:24.265136 [debug] [Thread-3 (]: On test.github_analytics_platform.dbt_utils_unique_combination_of_columns_stg_owner_repository_id__ingested_at.956b91cf90: ROLLBACK
+[0m16:48:24.265511 [debug] [Thread-1 (]: SQL status: SELECT 1 in 0.015 seconds
+[0m16:48:24.265918 [debug] [Thread-2 (]: SQL status: SELECT 1 in 0.017 seconds
+[0m16:48:24.266929 [debug] [Thread-4 (]: On test.github_analytics_platform.not_null_stg_owner_owner_id.37b0a0bdb9: ROLLBACK
+[0m16:48:24.268055 [debug] [Thread-1 (]: On test.github_analytics_platform.not_null_stg_owner_owner_login.f9d82be746: ROLLBACK
+[0m16:48:24.268436 [debug] [Thread-3 (]: On test.github_analytics_platform.dbt_utils_unique_combination_of_columns_stg_owner_repository_id__ingested_at.956b91cf90: Close
+[0m16:48:24.269582 [debug] [Thread-2 (]: On test.github_analytics_platform.accepted_values_stg_owner_owner_type__User__Organization.39d27773e3: ROLLBACK
+[0m16:48:24.270540 [info ] [Thread-3 (]: 3 of 6 PASS dbt_utils_unique_combination_of_columns_stg_owner_repository_id__ingested_at  [[32mPASS[0m in 0.07s]
+[0m16:48:24.271028 [debug] [Thread-1 (]: On test.github_analytics_platform.not_null_stg_owner_owner_login.f9d82be746: Close
+[0m16:48:24.271377 [debug] [Thread-4 (]: On test.github_analytics_platform.not_null_stg_owner_owner_id.37b0a0bdb9: Close
+[0m16:48:24.271871 [debug] [Thread-3 (]: Finished running node test.github_analytics_platform.dbt_utils_unique_combination_of_columns_stg_owner_repository_id__ingested_at.956b91cf90
+[0m16:48:24.272187 [debug] [Thread-2 (]: On test.github_analytics_platform.accepted_values_stg_owner_owner_type__User__Organization.39d27773e3: Close
+[0m16:48:24.272779 [info ] [Thread-1 (]: 5 of 6 PASS not_null_stg_owner_owner_login ..................................... [[32mPASS[0m in 0.07s]
+[0m16:48:24.273284 [info ] [Thread-4 (]: 4 of 6 PASS not_null_stg_owner_owner_id ........................................ [[32mPASS[0m in 0.07s]
+[0m16:48:24.273690 [debug] [Thread-3 (]: Began running node test.github_analytics_platform.not_null_stg_owner_repository_id.dbf6f93439
+[0m16:48:24.274251 [debug] [Thread-1 (]: Finished running node test.github_analytics_platform.not_null_stg_owner_owner_login.f9d82be746
+[0m16:48:24.274730 [info ] [Thread-2 (]: 2 of 6 PASS accepted_values_stg_owner_owner_type__User__Organization ........... [[32mPASS[0m in 0.07s]
+[0m16:48:24.275186 [debug] [Thread-4 (]: Finished running node test.github_analytics_platform.not_null_stg_owner_owner_id.37b0a0bdb9
+[0m16:48:24.275578 [info ] [Thread-3 (]: 6 of 6 START test not_null_stg_owner_repository_id ............................. [RUN]
+[0m16:48:24.276244 [debug] [Thread-2 (]: Finished running node test.github_analytics_platform.accepted_values_stg_owner_owner_type__User__Organization.39d27773e3
+[0m16:48:24.276810 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.github_analytics_platform.dbt_utils_unique_combination_of_columns_stg_owner_repository_id__ingested_at.956b91cf90, now test.github_analytics_platform.not_null_stg_owner_repository_id.dbf6f93439)
+[0m16:48:24.277323 [debug] [Thread-3 (]: Began compiling node test.github_analytics_platform.not_null_stg_owner_repository_id.dbf6f93439
+[0m16:48:24.282944 [debug] [Thread-3 (]: Writing injected SQL for node "test.github_analytics_platform.not_null_stg_owner_repository_id.dbf6f93439"
+[0m16:48:24.283527 [debug] [Thread-3 (]: Began executing node test.github_analytics_platform.not_null_stg_owner_repository_id.dbf6f93439
+[0m16:48:24.284940 [debug] [Thread-3 (]: Writing runtime sql for node "test.github_analytics_platform.not_null_stg_owner_repository_id.dbf6f93439"
+[0m16:48:24.285603 [debug] [Thread-3 (]: Using postgres connection "test.github_analytics_platform.not_null_stg_owner_repository_id.dbf6f93439"
+[0m16:48:24.286070 [debug] [Thread-3 (]: On test.github_analytics_platform.not_null_stg_owner_repository_id.dbf6f93439: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "github_analytics_platform", "target_name": "dev", "node_id": "test.github_analytics_platform.not_null_stg_owner_repository_id.dbf6f93439"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select repository_id
+from "github_analytics"."zz_check_staging"."stg_owner"
+where repository_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m16:48:24.286423 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m16:48:24.295596 [debug] [Thread-3 (]: SQL status: SELECT 1 in 0.009 seconds
+[0m16:48:24.297138 [debug] [Thread-3 (]: On test.github_analytics_platform.not_null_stg_owner_repository_id.dbf6f93439: ROLLBACK
+[0m16:48:24.297801 [debug] [Thread-3 (]: On test.github_analytics_platform.not_null_stg_owner_repository_id.dbf6f93439: Close
+[0m16:48:24.298361 [info ] [Thread-3 (]: 6 of 6 PASS not_null_stg_owner_repository_id ................................... [[32mPASS[0m in 0.02s]
+[0m16:48:24.298817 [debug] [Thread-3 (]: Finished running node test.github_analytics_platform.not_null_stg_owner_repository_id.dbf6f93439
+[0m16:48:24.300024 [debug] [MainThread]: On master: COMMIT
+[0m16:48:24.300408 [debug] [MainThread]: Using postgres connection "master"
+[0m16:48:24.300680 [debug] [MainThread]: On master: COMMIT
+[0m16:48:24.300959 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m16:48:24.308789 [debug] [MainThread]: SQL status: COMMIT in 0.008 seconds
+[0m16:48:24.309216 [debug] [MainThread]: On master: Close
+[0m16:48:24.309704 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m16:48:24.309995 [debug] [MainThread]: Connection 'test.github_analytics_platform.accepted_values_stg_owner_owner_type__User__Organization.39d27773e3' was properly closed.
+[0m16:48:24.310252 [debug] [MainThread]: Connection 'test.github_analytics_platform.not_null_stg_owner_owner_login.f9d82be746' was properly closed.
+[0m16:48:24.310504 [debug] [MainThread]: Connection 'test.github_analytics_platform.not_null_stg_owner_owner_id.37b0a0bdb9' was properly closed.
+[0m16:48:24.310740 [debug] [MainThread]: Connection 'test.github_analytics_platform.not_null_stg_owner_repository_id.dbf6f93439' was properly closed.
+[0m16:48:24.311058 [info ] [MainThread]: 
+[0m16:48:24.311391 [info ] [MainThread]: Finished running 5 data tests, 1 view model in 0 hours 0 minutes and 0.36 seconds (0.36s).
+[0m16:48:24.312639 [debug] [MainThread]: Command end result
+[0m16:48:24.344288 [debug] [MainThread]: Wrote artifact WritableManifest to /home/andrii/Developing/data-engineer/github-analytics-platform/dbt/target/manifest.json
+[0m16:48:24.346320 [debug] [MainThread]: Wrote artifact SemanticManifest to /home/andrii/Developing/data-engineer/github-analytics-platform/dbt/target/semantic_manifest.json
+[0m16:48:24.347868 [debug] [MainThread]: Wrote artifact OsiDocument to /home/andrii/Developing/data-engineer/github-analytics-platform/dbt/target/osi_document.json
+[0m16:48:24.353146 [debug] [MainThread]: Wrote artifact RunExecutionResult to /home/andrii/Developing/data-engineer/github-analytics-platform/dbt/target/run_results.json
+[0m16:48:24.353600 [info ] [MainThread]: 
+[0m16:48:24.354101 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m16:48:24.354529 [info ] [MainThread]: 
+[0m16:48:24.354871 [info ] [MainThread]: Done. PASS=6 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=6
+[0m16:48:24.355485 [debug] [MainThread]: Resource report: {"command_name": "build", "command_success": true, "command_wall_clock_time": 1.5949467, "process_in_blocks": "10536", "process_kernel_time": 0.276614, "process_mem_max_rss": "149160", "process_out_blocks": "4968", "process_user_time": 2.329312}
+[0m16:48:24.355898 [debug] [MainThread]: Command `dbt build` succeeded at 16:48:24.355825 after 1.60 seconds
+[0m16:48:24.356209 [debug] [MainThread]: Flushing usage events

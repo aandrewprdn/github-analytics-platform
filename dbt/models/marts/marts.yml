@@ -6,11 +6,11 @@ models:
     columns:
       - name: repository_id
         description: Stable GitHub repository identifier.
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: full_name
-        tests:
+        data_tests:
           - not_null
       - name: language_group
         description: Programming language with missing values grouped as Unknown.
@@ -20,19 +20,19 @@ models:
     description: Repository, star, and fork metrics grouped by programming language for dashboard comparisons.
     columns:
       - name: language_group
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: repository_count
-        tests:
+        data_tests:
           - not_null
   - name: agg_repository_creation_monthly
     description: Monthly repository creation counts and current popularity metrics for time-series dashboards.
     columns:
       - name: creation_month
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: repository_count
-        tests:
+        data_tests:
           - not_null

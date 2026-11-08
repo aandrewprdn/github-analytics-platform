@@ -1,5 +1,5 @@
 name: github_analytics_platform
-version: '1.0.0'
+version: "1.0.0"
 config-version: 2
 
 profile: github_analytics_platform
@@ -7,10 +7,21 @@ profile: github_analytics_platform
 model-paths: ["models"]
 test-paths: ["tests"]
 macro-paths: ["macros"]
+seed-paths: ["seeds"]
+snapshot-paths: ["snapshots"]
+analysis-paths: ["analyses"]
 
+clean-targets: ["target", "dbt_packages", "logs"]
+
+flags:
+  send_anonymous_usage_stats: false
+
+# Models land in "<target schema>_<folder schema>", e.g. analytics_staging / analytics_marts.
 models:
   github_analytics_platform:
     staging:
+      +schema: staging
       +materialized: view
     marts:
+      +schema: marts
       +materialized: table

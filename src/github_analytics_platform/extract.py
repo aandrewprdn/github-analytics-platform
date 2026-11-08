@@ -8,7 +8,7 @@ load_dotenv()
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
-INGESTION_PATH = "/home/andrii/Developing/data-engineer/github-analytics-platform/ingestions/github-analytics/bronze/github/repositories"
+INGESTION_PATH = "./ingestions/github-analytics/bronze/github/repositories"
 
 def save_json_to_parquet_local_file(json_data: dict, output_file: str):
     """

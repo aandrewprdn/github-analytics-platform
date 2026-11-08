@@ -12,8 +12,6 @@ from github_analytics_platform.copy_ingestions_postgre import transform_before_d
 from github_analytics_platform.github_client import GithubClient
 from github_analytics_platform.minio_client import MinioClient
 
-from dotenv import load_dotenv
-load_dotenv()
 
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)

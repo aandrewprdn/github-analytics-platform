@@ -1,12 +1,14 @@
+# Credentials come from the same POSTGRES_* variables as the rest of the stack (.env).
+# DBT_HOST defaults to localhost for local runs; docker-compose overrides it to "postgres".
 github_analytics_platform:
-  target: dev
+  target: "{{ env_var('DBT_TARGET', 'dev') }}"
   outputs:
     dev:
       type: postgres
-      host: "{{ env_var('DBT_HOST', 'de-postgres') }}"
-      port: "{{ env_var('DBT_PORT', '5432') | int }}"
-      user: "{{ env_var('DBT_USER') }}"
-      password: "{{ env_var('DBT_PASSWORD') }}"
-      dbname: "{{ env_var('DBT_DATABASE') }}"
-      schema: public
+      host: "{{ env_var('DBT_HOST', 'localhost') }}"
+      port: "{{ env_var('DBT_PORT', '5432') | as_number }}"
+      user: "{{ env_var('POSTGRES_USER') }}"
+      password: "{{ env_var('POSTGRES_PASSWORD') }}"
+      dbname: "{{ env_var('POSTGRES_DB') }}"
+      schema: "{{ env_var('DBT_SCHEMA', 'analytics') }}"
       threads: 4

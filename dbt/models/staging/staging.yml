@@ -5,8 +5,73 @@ models:
     description: Typed and normalized repository records from the raw ingestion table.
     columns:
       - name: repository_id
-        tests:
+        data_tests:
           - not_null
       - name: full_name
-        tests:
+        data_tests:
           - not_null
+      - name: stargazers_count
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+      - name: forks_count
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+  - name: stg_owner
+    description: >
+      Repository owner (user or organization) attributes unpacked from the raw `owner`
+      JSON column. Grain is one row per repository per ingestion, so the same owner
+      appears once for each repository and snapshot; deduplicate by `owner_id` in a
+      downstream model (for example, a future `dim_owners`).
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - repository_id
+              - ingested_at
+    columns:
+      - name: repository_id
+        description: GitHub repository ID the owner record was extracted from.
+        data_tests:
+          - not_null
+      - name: ingested_at
+        description: Timestamp of the ingestion run that captured this record.
+      - name: owner_id
+        description: Stable GitHub account ID of the owner.
+        data_tests:
+          - not_null
+      - name: owner_login
+        description: GitHub username or organization handle. It can change over time, so prefer owner_id for joins.
+        data_tests:
+          - not_null
+      - name: owner_node_id
+        description: GitHub GraphQL global node ID of the owner.
+      - name: owner_type
+        description: Account type, either User or Organization.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["User", "Organization"]
+      - name: is_site_admin
+        description: Whether the account is a GitHub staff site administrator.
+      - name: avatar_url
+        description: URL of the owner's avatar image.
+      - name: gravatar_id
+        description: Legacy Gravatar ID; empty strings are converted to null.
+      - name: owner_html_url
+        description: Public profile page of the owner on github.com.
+      - name: owner_api_url
+        description: REST API URL of the owner resource.
+      - name: followers_url
+        description: REST API URL listing the owner's followers.
+      - name: subscriptions_url
+        description: REST API URL listing repositories the owner watches.
+      - name: organizations_url
+        description: REST API URL listing organizations the owner belongs to.
+      - name: repos_url
+        description: REST API URL listing the owner's public repositories.
+      - name: received_events_url
+        description: REST API URL listing events the owner has received.
