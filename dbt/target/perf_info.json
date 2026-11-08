@@ -1,0 +1,57 @@
+{
+    "path_count": 192,
+    "parsed_path_count": 192,
+    "static_analysis_path_count": 4,
+    "static_analysis_parsed_path_count": 4,
+    "is_partial_parse_enabled": true,
+    "is_static_analysis_enabled": true,
+    "read_files_elapsed": 0.023303468999984034,
+    "load_macros_elapsed": 0.5793367669998588,
+    "parse_project_elapsed": 0.5076584139997067,
+    "patch_sources_elapsed": 0.018636524999692483,
+    "process_manifest_elapsed": 0.02484620499990342,
+    "load_all_elapsed": 1.2112108460000854,
+    "projects": [
+        {
+            "project_name": "github_analytics_platform",
+            "elapsed": 0.5051031969996984,
+            "parsers": [
+                {
+                    "parser": "model",
+                    "elapsed": 0.1850153930004126,
+                    "parsed_path_count": 4
+                },
+                {
+                    "parser": "test",
+                    "elapsed": 0.3191983600004278,
+                    "parsed_path_count": 3
+                }
+            ],
+            "parsed_path_count": 7
+        },
+        {
+            "project_name": "dbt_postgres",
+            "elapsed": 0.001070962999619951,
+            "parsers": [],
+            "parsed_path_count": 0
+        },
+        {
+            "project_name": "dbt",
+            "elapsed": 0.0007936309998513025,
+            "parsers": [
+                {
+                    "parser": "doc",
+                    "elapsed": 0.00015110899994397187,
+                    "parsed_path_count": 1
+                }
+            ],
+            "parsed_path_count": 1
+        },
+        {
+            "project_name": "dbt_utils",
+            "elapsed": 0.000610439999945811,
+            "parsers": [],
+            "parsed_path_count": 0
+        }
+    ]
+}
