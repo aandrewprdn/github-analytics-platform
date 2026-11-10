@@ -12,13 +12,14 @@ wheels/
 
 # Airflow
 airflow/logs
-
 ingestions
 
 minio.license
+
+
 # dbt
-dbt/target/
+dbt/target
 dbt/dbt_packages/
 dbt/logs/
 logs/
-.user.yml
+dbt/.user.yml

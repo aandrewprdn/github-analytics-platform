@@ -12,3 +12,4 @@ github_analytics_platform:
       dbname: "{{ env_var('POSTGRES_DB') }}"
       schema: "{{ env_var('DBT_SCHEMA', 'analytics') }}"
       threads: 4
+

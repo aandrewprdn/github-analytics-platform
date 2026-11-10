@@ -37,6 +37,10 @@ models:
         description: GitHub repository ID the owner record was extracted from.
         data_tests:
           - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_github_repositories')
+                field: repository_id
       - name: ingested_at
         description: Timestamp of the ingestion run that captured this record.
       - name: owner_id
