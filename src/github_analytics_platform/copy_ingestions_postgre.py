@@ -4,7 +4,47 @@ import json
 import logging
 import os
 
+from sqlalchemy import Engine, MetaData, Table, delete, func, insert
+
 logger = logging.getLogger(__name__)
+
+
+def replace_page_in_db(df: pl.DataFrame, table_name: str, engine: Engine) -> None:
+    """Idempotently load one bronze page into the raw table.
+
+    Bronze is stored as one file per (ingestion date, page) and a same-day re-run
+    overwrites that file, so the raw table mirrors it: delete the rows of this
+    (day, page) and insert the new ones in a single transaction. Retries and
+    re-runs replace data instead of appending duplicates; a new day adds a new
+    snapshot (deduplicated to the latest version in dbt's dim_repositories).
+
+    Args:
+        df (pl.DataFrame): output of transform_before_db for exactly one page
+        table_name (str): raw table name
+        engine (Engine): SQLAlchemy engine for the target database
+    """
+    if df.is_empty():
+        logger.info("Nothing to load: page is empty")
+        return
+
+    # The key comes from the data itself, so it always matches what is inserted.
+    ingestion_date = df["ingested_at"][0][:10]  # ISO timestamp -> "YYYY-MM-DD"
+    page = int(df["page"][0])
+
+    with engine.begin() as conn:  # one transaction: commit both or roll back both
+        table = Table(table_name, MetaData(), autoload_with=conn)
+        deleted = conn.execute(
+            delete(table).where(
+                func.left(table.c.ingested_at, 10) == ingestion_date,
+                table.c.page == page,
+            )
+        ).rowcount
+        conn.execute(insert(table), df.to_dicts())
+
+    logger.info(
+        "Loaded %s rows into %s for ingestion_date=%s page=%s (replaced %s existing rows)",
+        df.height, table_name, ingestion_date, page, deleted,
+    )
 
 def transform_before_db(df_ing: pl.DataFrame) -> pl.DataFrame:
     """Omits unnessesary columns and converts nested structs to jsonb

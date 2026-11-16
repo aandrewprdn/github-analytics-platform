@@ -11,12 +11,14 @@ x-airflow-common: &airflow-common
     AIRFLOW__API__EXPOSE_CONFIG: "true"
     AIRFLOW__CORE__EXECUTION_API_SERVER_URL: "http://airflow-api-server:8080/execution/"
     AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW__API_AUTH__JWT_SECRET}
+    # dbt/profiles.yml reads the host from DBT_HOST (defaults to localhost for local runs)
+    DBT_HOST: postgres
   volumes:
     - ./airflow/dags:/opt/airflow/dags
     - ./airflow/logs:/opt/airflow/logs
     - ./airflow/plugins:/opt/airflow/plugins
-    - ./ingestions:/opt/airflow/ingestions
     - ./src:/opt/airflow/src
+    - ./dbt:/opt/airflow/dbt_project  # not ".../dbt": that folder would shadow the dbt package on sys.path
   depends_on:
     postgres:
       condition: service_healthy

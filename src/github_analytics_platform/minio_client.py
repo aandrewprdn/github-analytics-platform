@@ -17,7 +17,10 @@ class MinioClient:
             aws_access_key_id=os.getenv("MINIO_ROOT_USER"),
             aws_secret_access_key=os.getenv("MINIO_ROOT_PASSWORD")
         )
-        self.base_key = os.getenv("MINIO_BASE_KEY")
+        # Prefix for bronze objects; the default keeps the existing key layout.
+        self.base_key = os.getenv(
+            "MINIO_BASE_KEY", "ingestions/github-analytics/bronze/github/repositories"
+        ).strip("/")
 
     def ensure_bucket(self):
         try:
@@ -35,5 +38,30 @@ class MinioClient:
             Filename=str(local_path),
             Bucket=self.bucket_name,
             Key=key,
+        )
+
+    def put_bytes(self, key: str, data: bytes, content_type: str = "application/octet-stream"):
+        """Write an in-memory object; overwrites an existing object with the same key."""
+        logger.info("Writing %s bytes -> s3://%s/%s", len(data), self.bucket_name, key)
+        self.client.put_object(
+            Bucket=self.bucket_name,
+            Key=key,
+            Body=data,
+            ContentType=content_type,
+        )
+
+    def read_bytes(self, key: str) -> bytes:
+        """Read a whole object into memory (fine for small bronze Parquet pages)."""
+        logger.info("Reading s3://%s/%s", self.bucket_name, key)
+        response = self.client.get_object(Bucket=self.bucket_name, Key=key)
+        return response["Body"].read()
+
+    def download_file(self, key: str, local_path: str):
+        logger.info("Downloading s3://%s/%s -> %s", self.bucket_name, key, local_path)
+
+        self.client.download_file(
+            Bucket=self.bucket_name,
+            Key=key,
+            Filename=local_path
         )
 

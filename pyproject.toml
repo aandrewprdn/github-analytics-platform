@@ -37,4 +37,5 @@ dev = [
     "ruff>=0.16.5",
     "apache-airflow>=3.3.2",
     "dbt-postgres>=1.11.0",
+    "astronomer-cosmos==1.16.0",
 ]
