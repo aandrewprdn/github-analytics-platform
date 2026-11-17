@@ -1,0 +1,13 @@
+# Postgres direct connector: every query runs live against the dbt marts.
+# Docs: https://docs.evidence.dev/direct-connectors/postgres
+# No secrets in this file: values come from environment variables (see .env and
+# docker-compose.yml), which is why it is safe to commit.
+type: postgres
+host: ${EVIDENCE_DB_HOST}
+port: 5432 # literal: ${VAR} values are strings and port must be a number
+user: ${EVIDENCE_DB_USER}
+password: ${EVIDENCE_DB_PASSWORD}
+database: ${EVIDENCE_DB_NAME}
+sslmode: disable # local Docker Postgres has no TLS; use verify-full for a managed database
+schema: analytics_marts # unqualified table names resolve to the dbt marts
+schemas: ["analytics_marts"]
