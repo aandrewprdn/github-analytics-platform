@@ -4,7 +4,7 @@ import os
 from datetime import datetime
 
 import polars as pl
-from airflow.sdk import dag, task
+from airflow.sdk import Param, dag, task
 from airflow.sdk.exceptions import AirflowSkipException
 from sqlalchemy import URL, BigInteger, Column, MetaData, Table, Text, create_engine
 
@@ -35,8 +35,64 @@ def postgres_url() -> URL:
     )
 
 
-@dag("github_extract_pipeline")
+@dag(
+    dag_id="github_extract_pipeline",
+    start_date=datetime(2026, 1, 1),
+    schedule="0 6 * * *",  # optional; daily at 06:00 UTC
+    catchup=False,
+    params={
+        "query": Param(
+            "dataengineer language:python",
+            type="string",
+            minLength=1,
+            maxLength=256,
+            title="GitHub search query",
+        ),
+        "sort": Param(
+            "stars",
+            type="string",
+            enum=["stars", "forks", "updated"],
+        ),
+        "order": Param(
+            "desc",
+            type="string",
+            enum=["asc", "desc"],
+        ),
+        "per_page": Param(
+            100,
+            type="integer",
+            minimum=1,
+            maximum=100,
+        ),
+        "pages_to_fetch": Param(
+            10,
+            type="integer",
+            minimum=1,
+            maximum=10,
+            description="Limit deliberately kept small for the portfolio demo.",
+        ),
+    },
+)
 def github_extract_pipeline():
+
+    @task
+    def build_extract_configs() -> list[dict]:
+        """Build a list of dicts for the mapped extract task to expand over."""
+        params = {
+            "q": "{{ params.query }}",
+            "sort": "{{ params.sort }}",
+            "order": "{{ params.order }}",
+            "per_page": "{{ params.per_page }}",
+            "pages_to_fetch": "{{ params.pages_to_fetch }}",
+        }
+        return [
+            {
+                "q": params["q"],
+                "per_page": int(params["per_page"]),
+                "page": page,
+            }
+            for page in range(1, int(params["pages_to_fetch"]) + 1)
+        ]
 
     @task
     def extract_and_save_bronze(q: str, per_page: int = 10, page: int = 1) -> dict:
@@ -150,17 +206,6 @@ def github_extract_pipeline():
     @task(outlets=[RAW_GITHUB_REPOSITORIES], trigger_rule="none_failed")
     def mark_raw_loaded():
         logger.info("Raw repositories loaded; emitting asset to trigger dbt")
-
-    @task
-    def build_extract_configs() -> list[dict]:
-        return [
-            {
-                "q": TEST_QUERY,
-                "per_page": 10,
-                "page": page,
-            }
-            for page in range(1, PAGES_TO_FETCH + 1)
-        ]
 
 
     extract_configs = build_extract_configs()
